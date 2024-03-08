@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+    test-mongo:
+        image: mongo:4.0.4
+        ports:
+          - 27017:27017
+        volumes:
+          - mongodb_data_container:/data/db
+        
+    rabbitmq3:
+        container_name: "rabbitmq"
+        image: rabbitmq:3-management
+        hostname: my-rabbitmq
+        environment:
+           - RABBITMQ_DEFAULT_USER=guest
+           - RABBITMQ_DEFAULT_PASS=guest
+        ports:
+           # AMQP protocol port
+           - '5672:5672'
+           # HTTP management UI
+           - '15672:15672'
+volumes:
+  mongodb_data_container:
